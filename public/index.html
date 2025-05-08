@@ -4,6 +4,7 @@
     <title>Music Player</title>
   </head>
   <body>
+    <audio id="audio-player" src="./music/poschady.mp3"></audio>
     <div class="container">
       <div class="rectangle">
         <div class="image-container">
@@ -13,27 +14,24 @@
           <div id="Track_Name">Пощады</div>
           <div id="Artist_Name">DK</div>
           <div class="player-controls">
-            <!-- Previous Button -->
             <button class="control-button prev-button" aria-label="Previous">
-                <svg class="icon" width="16" height="16" viewBox="0 0 16 16">
+                <svg class="icon" width="32" height="32" viewBox="0 0 16 16">
                     <path d="M13 2.5L5 7.119V3H3v10h2V8.881l8 4.619z"></path>
                 </svg>
             </button>
             
-            <!-- Play Button -->
             <button id="play-button" class="control-button play-button" aria-label="Play">
-                <svg id="play-icon" class="icon" width="16" height="16" viewBox="0 0 16 16">
+                <svg id="play-icon" class="icon" width="32" height="32" viewBox="0 0 16 16">
                     <path d="M4.018 14L14.41 8 4.018 2z"></path>
                 </svg>
                 
-                <svg id="pause-icon" class="icon" width="16" height="16" viewBox="0 0 16 16" style="display: none;">
+                <svg id="pause-icon" class="icon" width="32" height="32" viewBox="0 0 16 16" style="display: none;">
                     <path d="M2.7 1a.7.7 0 00-.7.7v12.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V1.7a.7.7 0 00-.7-.7H2.7zm8 0a.7.7 0 00-.7.7v12.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V1.7a.7.7 0 00-.7-.7h-2.6z"></path>
                 </svg>
             </button>
             
-            <!-- Next Button -->
             <button class="control-button next-button" aria-label="Next">
-                <svg class="icon" width="16" height="16" viewBox="0 0 16 16">
+                <svg class="icon" width="32" height="32" viewBox="0 0 16 16">
                     <path d="M11 3v4.119L3 2.5v11l8-4.619V13h2V3z"></path>
                 </svg>
             </button>
