@@ -30,27 +30,42 @@ document.addEventListener('DOMContentLoaded', function() {
     audioPlayer.addEventListener('timeupdate', function() {
         const currentTime = audioPlayer.currentTime;
         const duration = audioPlayer.duration;
-        const progressPercent = (currentTime / duration) * 100;
         
-        progressBar.value = progressPercent;
-        progressFill.style.width = `${progressPercent}%`;
-        
-        currentTimeElement.textContent = formatTime(currentTime);
         if (duration) {
+            const progressPercent = (currentTime / duration) * 100;
+            progressBar.value = progressPercent;
+            progressFill.style.width = `${progressPercent}%`;
+            
+            currentTimeElement.textContent = formatTime(currentTime);
             totalTimeElement.textContent = formatTime(duration);
         }
     });
 
+    // Когда трек закончился
+    audioPlayer.addEventListener('ended', function() {
+        pauseIcon.style.display = 'none';
+        playIcon.style.display = 'block';
+        progressBar.value = 0;
+        progressFill.style.width = '0%';
+        currentTimeElement.textContent = formatTime(0);
+    });
+
     // Seek functionality
     progressBar.addEventListener('input', function() {
-        const seekTime = (audioPlayer.duration / 100) * progressBar.value;
+        const seekTime = (audioPlayer.duration * progressBar.value) / 100;
+        audioPlayer.currentTime = seekTime;
+    });
+
+    progressBar.addEventListener('change', function() {
+        const seekTime = (audioPlayer.duration * progressBar.value) / 100;
         audioPlayer.currentTime = seekTime;
     });
 
     // Volume functionality
     volumeBar.addEventListener('input', function() {
-        audioPlayer.volume = volumeBar.value / 100;
-        volumeFill.style.width = `${volumeBar.value}%`;
+        const volumeValue = volumeBar.value;
+        audioPlayer.volume = volumeValue / 100;
+        volumeFill.style.width = `${volumeValue}%`;
         
         if (audioPlayer.volume === 0) {
             volumeIcon.style.display = 'none';
@@ -64,15 +79,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mute/unmute
     volumeButton.addEventListener('click', function() {
         if (audioPlayer.volume > 0) {
+            // Save current volume before muting
+            volumeBar.dataset.previousVolume = volumeBar.value;
             audioPlayer.volume = 0;
             volumeBar.value = 0;
             volumeFill.style.width = '0%';
             volumeIcon.style.display = 'none';
             muteIcon.style.display = 'block';
         } else {
-            audioPlayer.volume = 0.7;
-            volumeBar.value = 70;
-            volumeFill.style.width = '70%';
+            // Restore previous volume or default to 70
+            const previousVolume = volumeBar.dataset.previousVolume || 70;
+            audioPlayer.volume = previousVolume / 100;
+            volumeBar.value = previousVolume;
+            volumeFill.style.width = `${previousVolume}%`;
             volumeIcon.style.display = 'block';
             muteIcon.style.display = 'none';
         }
@@ -87,4 +106,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize
     audioPlayer.volume = 0.7;
+    volumeBar.value = 70;
+    volumeFill.style.width = '70%';
 });

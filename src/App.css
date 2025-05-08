@@ -5,72 +5,72 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Calibri', sans-serif;
 }
 
 .container {
     width: 100%;
-}
-
-.text-content {
-    width: 375px; /* Та же ширина, что и у изображения */
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 20px; /* Отступ сверху, как у изображения */
-    padding-left: 0; /* Убедитесь, что нет лишних отступов слева */
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .rectangle {
-    width: 475px;
+    width: 415px;
     height: 725px;
     background-color: #141415;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
-    color: rgb(255, 255, 255);
-    padding: 30px 20px; /* Уменьшенные отступы слева и справа */
+    color: white;
+    padding: 30px;
     box-sizing: border-box;
     border-radius: 30px;
+    position: relative;
 }
 
 .image-container {
-    margin-top: 30px;
-    margin-bottom: 20px;
-    text-align: center;
+    width: 315px;
+    height: 315px;
+    margin: 10px 0 20px 0;
 }
 
 img {
-    width: 375px;
-    height: 375px;
+    width: 100%;
+    height: 100%;
     border-radius: 10px;
-    box-shadow:
-    inset 0 -3em 3em rgba(0, 0, 0, 0.5),
-    0.3em 0.3em 1em rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.5), 
+                0.3em 0.3em 1em rgba(0, 0, 0, 0.5);
+    object-fit: cover;
+}
+
+.text-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
 }
 
 #Track_Name {
-    color: rgb(255, 255, 255);
-    font-family: 'Calibri';
-    font-size: x-large;
+    color: white;
+    font-size: 24px;
     font-weight: bold;
+    margin-bottom: -8px;
 }
 
 #Artist_Name {
-    color: rgba(255, 255, 255, 0.527);
-    font-family: 'Calibri';
-    font-size: x-large;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 20px;
     font-weight: bold;
 }
 
 .player-controls {
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 16px;
-    margin-top: 25px;
+    align-items: center;
+    gap: 25px;
+    margin: 25px 0 20px 0;
 }
 
 .control-button {
@@ -82,111 +82,142 @@ img {
     align-items: center;
     justify-content: center;
     transition: all 0.2s;
+    padding: 0;
 }
 
 .prev-button, .next-button {
-    width: 80px;
-    height: 80px;
+    width: 65px;
+    height: 65px;
     color: #b3b3b3;
 }
 
 .play-button {
-    width: 80px;
-    height: 80px;
+    width: 75px;
+    height: 75px;
     background-color: white;
     color: black;
 }
 
-.prev-button:hover, .next-button:hover {
-    color: white;
-    transform: scale(1.1);
+.control-button:hover {
+    transform: scale(1.05);
 }
 
 .play-button:hover {
-    transform: scale(1.05);
     background-color: #f8f8f8;
 }
 
 .icon {
     fill: currentColor;
+    display: block;
 }
 
-/* Обновленные стили для прогресс-бара и громкости */
 .progress-container {
     width: 100%;
-    margin: 20px 0;
+    margin: 15px 0 5px 0;
+}
+
+.time-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 8px;
 }
 
 .volume-container {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
     width: 100%;
-    margin-top: 20px;
+    margin: 30px 0 10px 0;
 }
 
-/* Общие стили для ползунков */
+.volume-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.volume-button .icon {
+    width: 24px;
+    height: 24px;
+    color: #b3b3b3;
+}
+
+.volume-button:hover .icon {
+    color: white;
+}
+
+/* Обновленные стили для полос прогресса и громкости */
+.progress-bar-container, 
+.volume-bar-container {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    background-color: #535353;
+    border-radius: 2px;
+}
+
 input[type="range"] {
     -webkit-appearance: none;
     width: 100%;
-    height: 6px;
-    border-radius: 3px;
-    background: #535353;
-    outline: none;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-input[type="range"]:hover {
-    height: 8px;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: white;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.2s, transform 0.2s;
-}
-
-input[type="range"]:hover::-webkit-slider-thumb {
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-/* Заполненные части ползунков */
-.progress-bar-fill, .volume-bar-fill {
+    height: 100%;
+    background: transparent;
     position: absolute;
     top: 0;
     left: 0;
-    height: 6px;
-    background-color: #1db954;
-    border-radius: 3px;
-    pointer-events: none;
-    transition: width 0.1s;
+    margin: 0;
+    cursor: pointer;
+    z-index: 2;
 }
 
-input[type="range"]:hover + .progress-bar-fill,
-input[type="range"]:hover + .volume-bar-fill {
-    height: 8px;
+/* Убраны кружочки (ползунки) */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 0;
+    height: 0;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 0;
+    height: 0;
+    border: none;
+}
+
+.progress-bar-fill, 
+.volume-bar-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.progress-bar-fill {
+    background-color: white;
 }
 
 .volume-bar-fill {
     background-color: #b3b3b3;
 }
 
-#volume-bar:hover + .volume-bar-fill {
-    background-color: #1db954;
-}
-
-/* Время трека */
-.time-info {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    margin-top: 8px;
-    color: rgba(255, 255, 255, 0.7);
+/* Адаптация для мобильных устройств */
+@media (max-width: 500px) {
+    .rectangle {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+    }
+    
+    .image-container {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1/1;
+    }
 }
