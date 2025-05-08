@@ -111,3 +111,82 @@ img {
     fill: currentColor;
 }
 
+/* Обновленные стили для прогресс-бара и громкости */
+.progress-container {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.volume-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Общие стили для ползунков */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: #535353;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+input[type="range"]:hover {
+    height: 8px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Заполненные части ползунков */
+.progress-bar-fill, .volume-bar-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 6px;
+    background-color: #1db954;
+    border-radius: 3px;
+    pointer-events: none;
+    transition: width 0.1s;
+}
+
+input[type="range"]:hover + .progress-bar-fill,
+input[type="range"]:hover + .volume-bar-fill {
+    height: 8px;
+}
+
+.volume-bar-fill {
+    background-color: #b3b3b3;
+}
+
+#volume-bar:hover + .volume-bar-fill {
+    background-color: #1db954;
+}
+
+/* Время трека */
+.time-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-top: 8px;
+    color: rgba(255, 255, 255, 0.7);
+}
