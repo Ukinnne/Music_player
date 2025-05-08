@@ -11,6 +11,16 @@ body {
     width: 100%;
 }
 
+.text-content {
+    width: 375px; /* Та же ширина, что и у изображения */
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px; /* Отступ сверху, как у изображения */
+    padding-left: 0; /* Убедитесь, что нет лишних отступов слева */
+}
+
 .rectangle {
     width: 475px;
     height: 725px;
@@ -21,7 +31,7 @@ body {
     justify-content: flex-start;
     align-items: center;
     color: white;
-    padding: 20px;
+    padding: 30px 20px; /* Уменьшенные отступы слева и справа */
     box-sizing: border-box;
     border-radius: 30px;
 }
@@ -41,9 +51,16 @@ img {
     0.3em 0.3em 1em rgba(0, 0, 0, 0.5);
 }
 
-.text-content {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+#Track_Name {
+    color: rgb(255, 255, 255);
+    font-family: 'Calibri';
+    font-size: x-large;
+    font-weight: bold;
+}
+
+#Artist_Name {
+    color: rgba(255, 255, 255, 0.527);
+    font-family: 'Calibri';
+    font-size: x-large;
+    font-weight: bold;
 }
