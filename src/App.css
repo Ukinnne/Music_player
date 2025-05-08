@@ -1,3 +1,18 @@
 body {
     background-color: black;
 }
+
+.container {
+    position: right;
+}
+  
+.rectangle {
+    position: absolute;
+    width: 475px;
+    height: 725px;
+    background-color: #141415;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    Border-radius: 30px;
+}
