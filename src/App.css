@@ -30,7 +30,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    color: white;
+    color: rgb(255, 255, 255);
     padding: 30px 20px; /* Уменьшенные отступы слева и справа */
     box-sizing: border-box;
     border-radius: 30px;
@@ -63,4 +63,49 @@ img {
     font-family: 'Calibri';
     font-size: x-large;
     font-weight: bold;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.control-button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.prev-button, .next-button {
+    width: 32px;
+    height: 32px;
+    color: #b3b3b3;
+}
+
+.play-button {
+    width: 48px;
+    height: 48px;
+    background-color: white;
+    color: black;
+}
+
+.prev-button:hover, .next-button:hover {
+    color: white;
+    transform: scale(1.1);
+}
+
+.play-button:hover {
+    transform: scale(1.05);
+    background-color: #f8f8f8;
+}
+
+/* SVG icons */
+.icon {
+    fill: currentColor;
 }
