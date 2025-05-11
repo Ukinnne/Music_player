@@ -226,3 +226,77 @@ input[type="range"]::-moz-range-thumb {
         padding: 30px;
     }
 }
+
+/* Добавляем новые стили для модального окна и кнопки запуска */
+.launch-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.launch-button {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+.launch-button:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+}
+
+.modal-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: relative;
+    z-index: 101;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Обновляем стили для rectangle в модальном окне */
+.modal .rectangle {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Обновляем медиа-запрос для мобильных устройств */
+@media (max-width: 500px) {
+    .modal .rectangle {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+}

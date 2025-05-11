@@ -12,6 +12,26 @@ document.addEventListener('DOMContentLoaded', function() {
     const muteIcon = document.getElementById('mute-icon');
     const volumeBar = document.getElementById('volume-bar');
     const volumeFill = document.querySelector('.volume-bar-fill');
+    
+    // Добавляем элементы для модального окна
+    const launchButton = document.getElementById('launch-button');
+    const playerModal = document.getElementById('player-modal');
+    
+    // Обработчик для кнопки запуска
+    launchButton.addEventListener('click', function() {
+        playerModal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Запрещаем прокрутку фона
+    });
+    
+    // Закрытие модального окна при клике на фон
+    const modalBackground = document.querySelector('.modal-background');
+    modalBackground.addEventListener('click', function() {
+        playerModal.style.display = 'none';
+        document.body.style.overflow = ''; // Возвращаем прокрутку
+        audioPlayer.pause(); // Останавливаем музыку при закрытии
+        pauseIcon.style.display = 'none';
+        playIcon.style.display = 'block';
+    });
 
     // Play/Pause functionality
     playButton.addEventListener('click', function() {

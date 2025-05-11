@@ -6,12 +6,22 @@
   </head>
   <body>
     <audio id="audio-player" src="./music/poschady.mp3"></audio>
-    <div class="container">
-      <div class="rectangle">
+    
+    <!-- Добавляем кнопку запуска плеера -->
+    <div class="launch-container">
+      <button id="launch-button" class="launch-button">Открыть плеер</button>
+    </div>
+    
+    <!-- Обернем плеер в модальное окно -->
+    <div id="player-modal" class="modal">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <div class="container">
+          <div class="rectangle">
         <div class="image-container">
           <img src="./images/SYNONIM.png" alt="Обложка альбома" />
         </div>
-        <div class="text-content">
+          <div class="text-content">
           <div id="Track_Name">Пощады</div>
           <div id="Artist_Name">DK</div>
           
@@ -51,7 +61,6 @@
             </button>
           </div>
           
-          <!-- Volume Control - перемещен вниз -->
           <div class="volume-container">
               <button id="volume-button" class="volume-button" aria-label="Volume">
                   <svg id="volume-icon" class="icon" width="16" height="16" viewBox="0 0 16 16">
