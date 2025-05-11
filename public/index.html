@@ -7,79 +7,79 @@
   <body>
     <audio id="audio-player" src="./music/poschady.mp3"></audio>
     
-    <!-- Добавляем кнопку запуска плеера -->
+    <!-- Launch button container -->
     <div class="launch-container">
       <button id="launch-button" class="launch-button">Открыть плеер</button>
     </div>
     
-    <!-- Обернем плеер в модальное окно -->
+    <!-- Player modal -->
     <div id="player-modal" class="modal">
       <div class="modal-background"></div>
       <div class="modal-content">
         <div class="container">
           <div class="rectangle">
-        <div class="image-container">
-          <img src="./images/SYNONIM.png" alt="Обложка альбома" />
-        </div>
-          <div class="text-content">
-          <div id="Track_Name">Пощады</div>
-          <div id="Artist_Name">DK</div>
-          
-          <!-- Progress Bar - перемещен над кнопками -->
-          <div class="progress-container">
-            <div class="progress-bar-container">
-                <input type="range" id="progress-bar" min="0" max="100" value="0" aria-label="Song progress">
-                <div class="progress-bar-fill" style="width: 0%;"></div>
+            <div class="image-container">
+              <img id="album-cover" src="./images/SYNONIM.png" alt="Обложка альбома" />
             </div>
-            <div class="time-info">
-                <span id="current-time">0:00</span>
-                <span id="total-time">0:00</span>
-            </div>
-          </div>
-          
-          <div class="player-controls">
-            <button class="control-button prev-button" aria-label="Previous">
-                <svg class="icon" width="32" height="32" viewBox="0 0 16 16">
-                    <path d="M13 2.5L5 7.119V3H3v10h2V8.881l8 4.619z"></path>
-                </svg>
-            </button>
-            
-            <button id="play-button" class="control-button play-button" aria-label="Play">
-                <svg id="play-icon" class="icon" width="32" height="32" viewBox="0 0 16 16">
-                    <path d="M4.018 14L14.41 8 4.018 2z"></path>
-                </svg>
-                
-                <svg id="pause-icon" class="icon" width="32" height="32" viewBox="0 0 16 16" style="display: none;">
-                    <path d="M2.7 1a.7.7 0 00-.7.7v12.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V1.7a.7.7 0 00-.7-.7H2.7zm8 0a.7.7 0 00-.7.7v12.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V1.7a.7.7 0 00-.7-.7h-2.6z"></path>
-                </svg>
-            </button>
-            
-            <button class="control-button next-button" aria-label="Next">
-                <svg class="icon" width="32" height="32" viewBox="0 0 16 16">
-                    <path d="M11 3v4.119L3 2.5v11l8-4.619V13h2V3z"></path>
-                </svg>
-            </button>
-          </div>
-          
-          <div class="volume-container">
-              <button id="volume-button" class="volume-button" aria-label="Volume">
-                  <svg id="volume-icon" class="icon" width="16" height="16" viewBox="0 0 16 16">
-                      <path d="M12.945 1.379l-.652.763c1.577 1.462 2.57 3.544 2.57 5.858s-.994 4.396-2.57 5.858l.651.763a8.966 8.966 0 00.001-13.242zm-2.272 2.66l-.651.763a4.484 4.484 0 01-.001 6.397l.651.763c1.04-1 1.691-2.404 1.691-3.961s-.65-2.962-1.69-3.962zM0 5v6h2.804L8 14V2L2.804 5H0zm7-1.268v8.536L3.072 10H1V6h2.072L7 3.732z"></path>
-                  </svg>
-                  
-                  <svg id="mute-icon" class="icon" width="16" height="16" viewBox="0 0 16 16" style="display: none;">
-                      <path d="M0 5v6h2.804L8 14V2L2.804 5H0zm7-1.268v8.536L3.072 10H1V6h2.072L7 3.732zm8.623 2.121l-.707-.707-2.147 2.147-2.146-2.147-.707.707L12.062 8l-2.146 2.146.707.707 2.146-2.147 2.147 2.147.707-.707L13.477 8l2.146-2.147z"></path>
-                  </svg>
-              </button>
+            <div class="text-content">
+              <div id="Track_Name">Пощады</div>
+              <div id="Artist_Name">DK</div>
               
-              <div class="volume-bar-container">
+              <!-- Progress Bar -->
+              <div class="progress-container">
+                <div class="progress-bar-container">
+                  <input type="range" id="progress-bar" min="0" max="100" value="0" aria-label="Song progress">
+                  <div class="progress-bar-fill" style="width: 0%;"></div>
+                </div>
+                <div class="time-info">
+                  <span id="current-time">0:00</span>
+                  <span id="total-time">0:00</span>
+                </div>
+              </div>
+              
+              <div class="player-controls">
+                <button class="control-button prev-button" aria-label="Previous">
+                  <svg class="icon" width="32" height="32" viewBox="0 0 16 16">
+                    <path d="M13 2.5L5 7.119V3H3v10h2V8.881l8 4.619z"></path>
+                  </svg>
+                </button>
+                
+                <button id="play-button" class="control-button play-button" aria-label="Play">
+                  <svg id="play-icon" class="icon" width="32" height="32" viewBox="0 0 16 16">
+                    <path d="M4.018 14L14.41 8 4.018 2z"></path>
+                  </svg>
+                  <svg id="pause-icon" class="icon" width="32" height="32" viewBox="0 0 16 16" style="display: none;">
+                    <path d="M2.7 1a.7.7 0 00-.7.7v12.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V1.7a.7.7 0 00-.7-.7H2.7zm8 0a.7.7 0 00-.7.7v12.6a.7.7 0 00.7.7h2.6a.7.7 0 00.7-.7V1.7a.7.7 0 00-.7-.7h-2.6z"></path>
+                  </svg>
+                </button>
+                
+                <button class="control-button next-button" aria-label="Next">
+                  <svg class="icon" width="32" height="32" viewBox="0 0 16 16">
+                    <path d="M11 3v4.119L3 2.5v11l8-4.619V13h2V3z"></path>
+                  </svg>
+                </button>
+              </div>
+              
+              <div class="volume-container">
+                <button id="volume-button" class="volume-button" aria-label="Volume">
+                  <svg id="volume-icon" class="icon" width="16" height="16" viewBox="0 0 16 16">
+                    <path d="M12.945 1.379l-.652.763c1.577 1.462 2.57 3.544 2.57 5.858s-.994 4.396-2.57 5.858l.651.763a8.966 8.966 0 00.001-13.242zm-2.272 2.66l-.651.763a4.484 4.484 0 01-.001 6.397l.651.763c1.04-1 1.691-2.404 1.691-3.961s-.65-2.962-1.69-3.962zM0 5v6h2.804L8 14V2L2.804 5H0zm7-1.268v8.536L3.072 10H1V6h2.072L7 3.732z"></path>
+                  </svg>
+                  <svg id="mute-icon" class="icon" width="16" height="16" viewBox="0 0 16 16" style="display: none;">
+                    <path d="M0 5v6h2.804L8 14V2L2.804 5H0zm7-1.268v8.536L3.072 10H1V6h2.072L7 3.732zm8.623 2.121l-.707-.707-2.147 2.147-2.146-2.147-.707.707L12.062 8l-2.146 2.146.707.707 2.146-2.147 2.147 2.147.707-.707L13.477 8l2.146-2.147z"></path>
+                  </svg>
+                </button>
+                
+                <div class="volume-bar-container">
                   <input type="range" id="volume-bar" min="0" max="100" value="70" aria-label="Volume control">
                   <div class="volume-bar-fill" style="width: 70%;"></div>
+                </div>
               </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <script src="script.js"></script>
+    <script src="App.js"></script>
   </body>
 </html>

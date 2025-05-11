@@ -12,23 +12,69 @@ document.addEventListener('DOMContentLoaded', function() {
     const muteIcon = document.getElementById('mute-icon');
     const volumeBar = document.getElementById('volume-bar');
     const volumeFill = document.querySelector('.volume-bar-fill');
-    
-    // Добавляем элементы для модального окна
     const launchButton = document.getElementById('launch-button');
     const playerModal = document.getElementById('player-modal');
-    
-    // Обработчик для кнопки запуска
+    const modalBackground = document.querySelector('.modal-background');
+    const prevButton = document.querySelector('.prev-button');
+    const nextButton = document.querySelector('.next-button');
+    const trackNameElement = document.getElementById('Track_Name');
+    const artistNameElement = document.getElementById('Artist_Name');
+    const albumCoverElement = document.getElementById('album-cover');
+
+    // Track database
+    const tracks = [
+        {
+            trackName: "Пощады",
+            artistName: "DK",
+            mp3Src: "./music/poschady.mp3",
+            coverSrc: "./images/SYNONIM.png"
+        },
+        {
+            trackName: "KILL ME MAYBE",
+            artistName: "CMH",
+            mp3Src: "./music/KILL_ME_MAYBE.mp3",
+            coverSrc: "./images/KILL_THIS_ALBUM.jpg"
+        },
+        {
+            trackName: "Лох",
+            artistName: "LIDA",
+            mp3Src: "./music/loh.mp3",
+            coverSrc: "./images/NEW_ROCK_STAR.jpg"
+        }
+    ];
+
+    let currentTrackIndex = 0;
+
+    // Function to load a track
+    function loadTrack(index) {
+        const track = tracks[index];
+        audioPlayer.src = track.mp3Src;
+        trackNameElement.textContent = track.trackName;
+        artistNameElement.textContent = track.artistName;
+        albumCoverElement.src = track.coverSrc;
+        audioPlayer.currentTime = 0;
+        progressBar.value = 0;
+        progressFill.style.width = '0%';
+        currentTimeElement.textContent = '0:00';
+        totalTimeElement.textContent = '0:00';
+        pauseIcon.style.display = 'none';
+        playIcon.style.display = 'block';
+    }
+
+    // Load the first track initially
+    loadTrack(currentTrackIndex);
+
+    // Launch button handler
     launchButton.addEventListener('click', function() {
         playerModal.style.display = 'block';
-        document.body.style.overflow = 'hidden'; // Запрещаем прокрутку фона
+        document.body.style.overflow = 'hidden';
     });
-    
-    // Закрытие модального окна при клике на фон
-    const modalBackground = document.querySelector('.modal-background');
+
+    // Modal background click to close
     modalBackground.addEventListener('click', function() {
         playerModal.style.display = 'none';
-        document.body.style.overflow = ''; // Возвращаем прокрутку
-        audioPlayer.pause(); // Останавливаем музыку при закрытии
+        document.body.style.overflow = '';
+        audioPlayer.pause();
         pauseIcon.style.display = 'none';
         playIcon.style.display = 'block';
     });
@@ -61,13 +107,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Когда трек закончился
+    // When track ends, play next track
     audioPlayer.addEventListener('ended', function() {
-        pauseIcon.style.display = 'none';
-        playIcon.style.display = 'block';
-        progressBar.value = 0;
-        progressFill.style.width = '0%';
-        currentTimeElement.textContent = formatTime(0);
+        nextTrack();
     });
 
     // Seek functionality
@@ -99,7 +141,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mute/unmute
     volumeButton.addEventListener('click', function() {
         if (audioPlayer.volume > 0) {
-            // Save current volume before muting
             volumeBar.dataset.previousVolume = volumeBar.value;
             audioPlayer.volume = 0;
             volumeBar.value = 0;
@@ -107,7 +148,6 @@ document.addEventListener('DOMContentLoaded', function() {
             volumeIcon.style.display = 'none';
             muteIcon.style.display = 'block';
         } else {
-            // Restore previous volume or default to 70
             const previousVolume = volumeBar.dataset.previousVolume || 70;
             audioPlayer.volume = previousVolume / 100;
             volumeBar.value = previousVolume;
@@ -116,6 +156,26 @@ document.addEventListener('DOMContentLoaded', function() {
             muteIcon.style.display = 'none';
         }
     });
+
+    // Previous track
+    prevButton.addEventListener('click', function() {
+        currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+        loadTrack(currentTrackIndex);
+        if (!audioPlayer.paused) {
+            audioPlayer.play();
+        }
+    });
+
+    // Next track
+    nextButton.addEventListener('click', nextTrack);
+
+    function nextTrack() {
+        currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+        loadTrack(currentTrackIndex);
+        if (!audioPlayer.paused) {
+            audioPlayer.play();
+        }
+    }
 
     // Format time (seconds to mm:ss)
     function formatTime(seconds) {

@@ -56,12 +56,18 @@ img {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: -8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #Artist_Name {
     color: rgba(255, 255, 255, 0.7);
     font-size: 20px;
     font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .player-controls {
@@ -227,7 +233,6 @@ input[type="range"]::-moz-range-thumb {
     }
 }
 
-/* Добавляем новые стили для модального окна и кнопки запуска */
 .launch-container {
     display: flex;
     justify-content: center;
@@ -282,7 +287,6 @@ input[type="range"]::-moz-range-thumb {
     align-items: center;
 }
 
-/* Обновляем стили для rectangle в модальном окне */
 .modal .rectangle {
     animation: fadeIn 0.3s ease-out;
 }
@@ -292,7 +296,6 @@ input[type="range"]::-moz-range-thumb {
     to { opacity: 1; transform: scale(1); }
 }
 
-/* Обновляем медиа-запрос для мобильных устройств */
 @media (max-width: 500px) {
     .modal .rectangle {
         width: 100%;
