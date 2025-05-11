@@ -1,5 +1,5 @@
 body {
-    background-color: black;
+    background-color: #141415;
     margin: 0;
     min-height: 100vh;
     font-family: 'Calibri', sans-serif;
@@ -91,22 +91,23 @@ img {
 .prev-button, .next-button {
     width: 65px;
     height: 65px;
-    color: #b3b3b3;
+    color: white;
 }
 
 .play-button {
     width: 75px;
     height: 75px;
     background-color: white;
-    color: black;
+    color: #141415;
 }
 
 .control-button:hover {
-    transform: scale(1.05);
+    color: #e6e6e6;
 }
 
 .play-button:hover {
-    background-color: #f8f8f8;
+    background-color: #e6e6e6;
+    color: #141415;
 }
 
 .icon {
@@ -249,9 +250,12 @@ input[type="range"]::-moz-range-thumb {
 
 /* Track list styles */
 .track-list-container {
-    max-width: 800px;
+    width: 415px;
+    background-color: #141415;
     margin: 40px auto;
-    padding: 20px;
+    padding: 30px;
+    border-radius: 30px;
+    box-sizing: border-box;
 }
 
 .track-list {
@@ -263,7 +267,7 @@ input[type="range"]::-moz-range-thumb {
 .track-card {
     display: flex;
     align-items: center;
-    background-color: #1a1a1a;
+    background-color: #141415;
     border-radius: 8px;
     padding: 10px;
     cursor: pointer;
@@ -272,7 +276,6 @@ input[type="range"]::-moz-range-thumb {
 
 .track-card:hover {
     background-color: #252525;
-    transform: scale(1.02);
 }
 
 .track-cover {
@@ -281,6 +284,7 @@ input[type="range"]::-moz-range-thumb {
     border-radius: 4px;
     object-fit: cover;
     margin-right: 15px;
+    box-shadow: 0.2em 0.2em 0.5em rgba(0, 0, 0, 0.3);
 }
 
 .track-info {
@@ -292,61 +296,12 @@ input[type="range"]::-moz-range-thumb {
     font-size: 18px;
     font-weight: bold;
     color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .artist-name {
     font-size: 14px;
     color: rgba(255, 255, 255, 0.7);
-}
-
-/* Responsive styles */
-@media (max-width: 500px) {
-    body {
-        padding: 0;
-    }
-    
-    .container {
-        padding: 0;
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .rectangle {
-        width: 100%;
-        height: 100%;
-        border-radius: 0;
-        padding: 30px;
-    }
-
-    .modal .rectangle {
-        width: 100%;
-        height: 100%;
-        border-radius: 0;
-    }
-
-    .track-list-container {
-        margin: 20px auto;
-        padding: 10px;
-    }
-
-    .track-card {
-        padding: 8px;
-    }
-
-    .track-cover {
-        width: 50px;
-        height: 50px;
-        margin-right: 10px;
-    }
-
-    .track-name {
-        font-size: 16px;
-    }
-
-    .artist-name {
-        font-size: 12px;
-    }
 }

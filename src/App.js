@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let currentTrackIndex = 0;
 
-    // Function to load a track
+    // Function to load a track and update button states
     function loadTrack(index) {
         const track = tracks[index];
         audioPlayer.src = track.mp3Src;
@@ -59,6 +59,15 @@ document.addEventListener('DOMContentLoaded', function() {
         totalTimeElement.textContent = '0:00';
         pauseIcon.style.display = 'none';
         playIcon.style.display = 'block';
+
+        // Disable/enable previous button
+        if (index === 0) {
+            prevButton.disabled = true;
+            prevButton.classList.add('disabled');
+        } else {
+            prevButton.disabled = false;
+            prevButton.classList.remove('disabled');
+        }
     }
 
     // Function to render track list
@@ -179,10 +188,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Previous track
     prevButton.addEventListener('click', function() {
-        currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
-        loadTrack(currentTrackIndex);
-        if (!audioPlayer.paused) {
-            audioPlayer.play();
+        if (currentTrackIndex > 0) {
+            currentTrackIndex = (currentTrackIndex - 1) % tracks.length;
+            loadTrack(currentTrackIndex);
+            if (!audioPlayer.paused) {
+                audioPlayer.play();
+            }
         }
     });
 
@@ -205,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Initialize
-    audioPlayer.volume = 0.7;
-    volumeBar.value = 70;
-    volumeFill.style.width = '70%';
+    audioPlayer.volume = 0.5;
+    volumeBar.value = 50;
+    volumeFill.style.width = '50%';
 });
