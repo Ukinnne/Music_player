@@ -38,7 +38,7 @@ img {
     width: 100%;
     height: 100%;
     border-radius: 10px;
-    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.5), 
+    box-shadow: inset 0 -3em 3em rgba(255, 255, 255, 0.5), 
                 0.3em 0.3em 1em rgba(0, 0, 0, 0.5);
     object-fit: cover;
 }
@@ -93,22 +93,23 @@ img {
 .prev-button, .next-button {
     width: 65px;
     height: 65px;
-    color: #b3b3b3;
+    color: white;
 }
 
 .play-button {
     width: 75px;
     height: 75px;
     background-color: white;
-    color: black;
+    color: #141415;
 }
 
 .control-button:hover {
-    transform: scale(1.05);
+    color: #e6e6e6;
 }
 
 .play-button:hover {
-    background-color: #f8f8f8;
+    background-color: #e6e6e6;
+    color: #141415;
 }
 
 .icon {
