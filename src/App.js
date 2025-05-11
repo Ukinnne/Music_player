@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const muteIcon = document.getElementById('mute-icon');
     const volumeBar = document.getElementById('volume-bar');
     const volumeFill = document.querySelector('.volume-bar-fill');
-    const launchButton = document.getElementById('launch-button');
     const playerModal = document.getElementById('player-modal');
     const modalBackground = document.querySelector('.modal-background');
     const prevButton = document.querySelector('.prev-button');
@@ -20,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const trackNameElement = document.getElementById('Track_Name');
     const artistNameElement = document.getElementById('Artist_Name');
     const albumCoverElement = document.getElementById('album-cover');
+    const trackListContainer = document.getElementById('track-list');
 
     // Track database
     const tracks = [
@@ -61,14 +61,34 @@ document.addEventListener('DOMContentLoaded', function() {
         playIcon.style.display = 'block';
     }
 
-    // Load the first track initially
-    loadTrack(currentTrackIndex);
+    // Function to render track list
+    function renderTrackList() {
+        trackListContainer.innerHTML = '';
+        tracks.forEach((track, index) => {
+            const trackCard = document.createElement('div');
+            trackCard.className = 'track-card';
+            trackCard.innerHTML = `
+                <img src="${track.coverSrc}" alt="${track.trackName} cover" class="track-cover">
+                <div class="track-info">
+                    <div class="track-name">${track.trackName}</div>
+                    <div class="artist-name">${track.artistName}</div>
+                </div>
+            `;
+            trackCard.addEventListener('click', () => {
+                currentTrackIndex = index;
+                loadTrack(currentTrackIndex);
+                playerModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                audioPlayer.play();
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+            });
+            trackListContainer.appendChild(trackCard);
+        });
+    }
 
-    // Launch button handler
-    launchButton.addEventListener('click', function() {
-        playerModal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    });
+    // Render track list on page load
+    renderTrackList();
 
     // Modal background click to close
     modalBackground.addEventListener('click', function() {
