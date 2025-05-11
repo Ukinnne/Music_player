@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const volumeBar = document.getElementById('volume-bar');
     const volumeFill = document.querySelector('.volume-bar-fill');
     const playerModal = document.getElementById('player-modal');
-    const modalBackground = document.querySelector('.modal-background');
     const prevButton = document.querySelector('.prev-button');
     const nextButton = document.querySelector('.next-button');
     const trackNameElement = document.getElementById('Track_Name');
@@ -44,8 +43,9 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     let currentTrackIndex = 0;
+    let wasPlaying = false;
 
-    // Function to load a track and update button states
+    // Function to load a track
     function loadTrack(index) {
         const track = tracks[index];
         audioPlayer.src = track.mp3Src;
@@ -57,10 +57,15 @@ document.addEventListener('DOMContentLoaded', function() {
         progressFill.style.width = '0%';
         currentTimeElement.textContent = '0:00';
         totalTimeElement.textContent = '0:00';
-        pauseIcon.style.display = 'none';
-        playIcon.style.display = 'block';
+        
+        if (audioPlayer.paused) {
+            pauseIcon.style.display = 'none';
+            playIcon.style.display = 'block';
+        } else {
+            playIcon.style.display = 'none';
+            pauseIcon.style.display = 'block';
+        }
 
-        // Disable/enable previous button
         if (index === 0) {
             prevButton.disabled = true;
             prevButton.classList.add('disabled');
@@ -86,11 +91,12 @@ document.addEventListener('DOMContentLoaded', function() {
             trackCard.addEventListener('click', () => {
                 currentTrackIndex = index;
                 loadTrack(currentTrackIndex);
-                playerModal.style.display = 'block';
+                playerModal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
                 audioPlayer.play();
                 playIcon.style.display = 'none';
                 pauseIcon.style.display = 'block';
+                wasPlaying = true;
             });
             trackListContainer.appendChild(trackCard);
         });
@@ -99,13 +105,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Render track list on page load
     renderTrackList();
 
-    // Modal background click to close
-    modalBackground.addEventListener('click', function() {
-        playerModal.style.display = 'none';
-        document.body.style.overflow = '';
-        audioPlayer.pause();
-        pauseIcon.style.display = 'none';
-        playIcon.style.display = 'block';
+    // Close modal when clicking on background
+    playerModal.addEventListener('click', function(e) {
+        if (e.target === playerModal || e.target.classList.contains('modal-background')) {
+            playerModal.style.display = 'none';
+            document.body.style.overflow = '';
+            audioPlayer.pause();
+            pauseIcon.style.display = 'none';
+            playIcon.style.display = 'block';
+            wasPlaying = false;
+        }
     });
 
     // Play/Pause functionality
@@ -114,10 +123,12 @@ document.addEventListener('DOMContentLoaded', function() {
             audioPlayer.play();
             playIcon.style.display = 'none';
             pauseIcon.style.display = 'block';
+            wasPlaying = true;
         } else {
             audioPlayer.pause();
             pauseIcon.style.display = 'none';
             playIcon.style.display = 'block';
+            wasPlaying = false;
         }
     });
 
@@ -147,10 +158,29 @@ document.addEventListener('DOMContentLoaded', function() {
         audioPlayer.currentTime = seekTime;
     });
 
-    progressBar.addEventListener('change', function() {
-        const seekTime = (audioPlayer.duration * progressBar.value) / 100;
-        audioPlayer.currentTime = seekTime;
+    // Previous track
+    prevButton.addEventListener('click', function() {
+        if (currentTrackIndex > 0) {
+            wasPlaying = !audioPlayer.paused;
+            currentTrackIndex--;
+            loadTrack(currentTrackIndex);
+            if (wasPlaying) {
+                audioPlayer.play();
+            }
+        }
     });
+
+    // Next track
+    nextButton.addEventListener('click', nextTrack);
+
+    function nextTrack() {
+        wasPlaying = !audioPlayer.paused;
+        currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+        loadTrack(currentTrackIndex);
+        if (wasPlaying) {
+            audioPlayer.play();
+        }
+    }
 
     // Volume functionality
     volumeBar.addEventListener('input', function() {
@@ -186,28 +216,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Previous track
-    prevButton.addEventListener('click', function() {
-        if (currentTrackIndex > 0) {
-            currentTrackIndex = (currentTrackIndex - 1) % tracks.length;
-            loadTrack(currentTrackIndex);
-            if (!audioPlayer.paused) {
-                audioPlayer.play();
-            }
-        }
-    });
-
-    // Next track
-    nextButton.addEventListener('click', nextTrack);
-
-    function nextTrack() {
-        currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
-        loadTrack(currentTrackIndex);
-        if (!audioPlayer.paused) {
-            audioPlayer.play();
-        }
-    }
-
     // Format time (seconds to mm:ss)
     function formatTime(seconds) {
         const minutes = Math.floor(seconds / 60);
@@ -219,4 +227,5 @@ document.addEventListener('DOMContentLoaded', function() {
     audioPlayer.volume = 0.5;
     volumeBar.value = 50;
     volumeFill.style.width = '50%';
+    loadTrack(0);
 });
