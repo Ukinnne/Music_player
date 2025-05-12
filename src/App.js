@@ -44,6 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let currentTrackIndex = 0;
     let wasPlaying = false;
+    let isFirstTrackPlayed = true;
+    let initialTrackIndex = null; // Запоминаем самый первый выбранный трек
+    let playlistEnded = false; // Флаг окончания плейлиста
 
     // Function to load a track
     function loadTrack(index) {
@@ -58,7 +61,8 @@ document.addEventListener('DOMContentLoaded', function() {
         currentTimeElement.textContent = '0:00';
         totalTimeElement.textContent = '0:00';
         
-        if (audioPlayer.paused) {
+        // Update play/pause button state
+        if (audioPlayer.paused && !wasPlaying) {
             pauseIcon.style.display = 'none';
             playIcon.style.display = 'block';
         } else {
@@ -66,13 +70,43 @@ document.addEventListener('DOMContentLoaded', function() {
             pauseIcon.style.display = 'block';
         }
 
-        if (index === 0) {
+        // Manage previous button state
+        if (isFirstTrackPlayed) {
             prevButton.disabled = true;
-            prevButton.classList.add('disabled');
+            prevButton.style.opacity = '0.5';
+            prevButton.style.cursor = 'default';
+            initialTrackIndex = index; // Запоминаем первый трек
         } else {
             prevButton.disabled = false;
-            prevButton.classList.remove('disabled');
+            prevButton.style.opacity = '1';
+            prevButton.style.cursor = 'pointer';
         }
+    }
+
+    function showPlaylistEndedMessage() {
+        // Создаем или обновляем сообщение
+        let message = document.getElementById('playlist-ended-message');
+        if (!message) {
+            message = document.createElement('div');
+            message.id = 'playlist-ended-message';
+            message.style.position = 'fixed';
+            message.style.bottom = '20px';
+            message.style.left = '50%';
+            message.style.transform = 'translateX(-50%)';
+            message.style.backgroundColor = 'rgba(0,0,0,0.7)';
+            message.style.color = 'white';
+            message.style.padding = '10px 20px';
+            message.style.borderRadius = '20px';
+            message.style.zIndex = '1000';
+            message.textContent = 'Плейлист закончился и идет заново';
+            document.body.appendChild(message);
+        }
+        
+        // Показываем на 3 секунды
+        message.style.display = 'block';
+        setTimeout(() => {
+            message.style.display = 'none';
+        }, 3000);
     }
 
     // Function to render track list
@@ -90,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
             `;
             trackCard.addEventListener('click', () => {
                 currentTrackIndex = index;
+                isFirstTrackPlayed = true;
                 loadTrack(currentTrackIndex);
                 playerModal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
@@ -160,13 +195,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Previous track
     prevButton.addEventListener('click', function() {
-        if (currentTrackIndex > 0) {
-            wasPlaying = !audioPlayer.paused;
+        if (isFirstTrackPlayed) return;
+        
+        wasPlaying = !audioPlayer.paused;
+        
+        if (currentTrackIndex === 0) {
+            currentTrackIndex = tracks.length - 1;
+        } else {
             currentTrackIndex--;
-            loadTrack(currentTrackIndex);
-            if (wasPlaying) {
-                audioPlayer.play();
-            }
+        }
+        
+        isFirstTrackPlayed = false;
+        loadTrack(currentTrackIndex);
+        if (wasPlaying) {
+            audioPlayer.play();
         }
     });
 
@@ -175,7 +217,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function nextTrack() {
         wasPlaying = !audioPlayer.paused;
+        
+        // Проверяем, был ли это последний трек
+        const wasLastTrack = currentTrackIndex === tracks.length - 1;
+        
         currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+        isFirstTrackPlayed = false;
+        
+        // Если перешли с последнего на первый - плейлист закончился
+        if (wasLastTrack && currentTrackIndex === 0) {
+            playlistEnded = true;
+            showPlaylistEndedMessage();
+        } else {
+            playlistEnded = false;
+        }
+        
         loadTrack(currentTrackIndex);
         if (wasPlaying) {
             audioPlayer.play();

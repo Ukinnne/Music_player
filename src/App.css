@@ -302,3 +302,15 @@ input[type="range"]::-moz-range-thumb {
     font-size: 14px;
     color: rgba(255, 255, 255, 0.7);
 }
+
+.control-button.disabled, 
+.control-button:disabled {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+}
+
+.control-button.disabled .icon, 
+.control-button:disabled .icon {
+    color: rgba(255, 255, 255, 0.5);
+}
