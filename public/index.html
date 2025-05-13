@@ -7,12 +7,10 @@
 <body>
     <audio id="audio-player" src="./music/poschady.mp3"></audio>
     
-    <!-- Track list container -->
     <div class="track-list-container">
         <div id="track-list" class="track-list"></div>
     </div>
     
-    <!-- Player modal -->
     <div id="player-modal" class="modal" style="display: none;">
         <div class="modal-background"></div>
         <div class="modal-content">
@@ -75,6 +73,44 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button id="add-track-button" class="add-track-button" aria-label="Add track">
+    <svg class="icon" width="24" height="24" viewBox="0 0 24 24">
+        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+    </svg>
+    </button>
+
+    <div id="add-track-modal" class="modal" style="display: none;">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <div class="container">
+                <div class="rectangle">
+                    <h2 style="margin-bottom: 20px;">Добавить новый трек</h2>
+                    <form id="add-track-form" class="track-form">
+                        <div class="form-group">
+                            <label for="new-track-name">Название трека</label>
+                            <input type="text" id="new-track-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-artist-name">Исполнитель</label>
+                            <input type="text" id="new-artist-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-mp3-file">MP3 файл</label>
+                            <input type="file" id="new-mp3-file" accept=".mp3" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-cover-file">Обложка</label>
+                            <input type="file" id="new-cover-file" accept="image/*" required>
+                        </div>
+                        <div class="form-buttons">
+                            <button type="button" id="cancel-add-track" class="cancel-button">Отмена</button>
+                            <button type="submit" class="submit-button">Добавить</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

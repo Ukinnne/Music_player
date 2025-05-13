@@ -314,3 +314,103 @@ input[type="range"]::-moz-range-thumb {
 .control-button:disabled .icon {
     color: rgba(255, 255, 255, 0.5);
 }
+
+/* Add track button styles */
+.add-track-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #1DB954;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 99;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.add-track-button:hover {
+    background-color: #1ed760;
+    transform: scale(1.05);
+}
+
+.add-track-button .icon {
+    color: white;
+    width: 30px;
+    height: 30px;
+}
+
+/* Form styles */
+.track-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.form-group input[type="text"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #535353;
+    background-color: #252525;
+    color: white;
+    font-size: 16px;
+}
+
+.form-group input[type="file"] {
+    padding: 5px 0;
+    color: white;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.submit-button {
+    padding: 10px 20px;
+    background-color: #1DB954;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.submit-button:hover {
+    background-color: #1ed760;
+}
+
+.cancel-button {
+    padding: 10px 20px;
+    background-color: transparent;
+    color: white;
+    border: 1px solid #535353;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.cancel-button:hover {
+    background-color: #252525;
+}

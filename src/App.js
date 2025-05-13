@@ -19,6 +19,75 @@ document.addEventListener('DOMContentLoaded', function() {
     const artistNameElement = document.getElementById('Artist_Name');
     const albumCoverElement = document.getElementById('album-cover');
     const trackListContainer = document.getElementById('track-list');
+        // Add track elements
+    const addTrackButton = document.getElementById('add-track-button');
+    const addTrackModal = document.getElementById('add-track-modal');
+    const addTrackForm = document.getElementById('add-track-form');
+    const cancelAddTrack = document.getElementById('cancel-add-track');
+    const newTrackName = document.getElementById('new-track-name');
+    const newArtistName = document.getElementById('new-artist-name');
+    const newMp3File = document.getElementById('new-mp3-file');
+    const newCoverFile = document.getElementById('new-cover-file');
+
+    // Open add track modal
+    addTrackButton.addEventListener('click', function() {
+        addTrackModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    });
+
+    // Close add track modal
+    cancelAddTrack.addEventListener('click', function() {
+        addTrackModal.style.display = 'none';
+        document.body.style.overflow = '';
+        addTrackForm.reset();
+    });
+
+    // Close modal when clicking on background
+    addTrackModal.addEventListener('click', function(e) {
+        if (e.target === addTrackModal || e.target.classList.contains('modal-background')) {
+            addTrackModal.style.display = 'none';
+            document.body.style.overflow = '';
+            addTrackForm.reset();
+        }
+    });
+
+    // Add new track
+    addTrackForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const trackName = newTrackName.value.trim();
+        const artistName = newArtistName.value.trim();
+        
+        if (!trackName || !artistName || !newMp3File.files[0] || !newCoverFile.files[0]) {
+            alert('Пожалуйста, заполните все поля');
+            return;
+        }
+        
+        // Create object URLs for the files
+        const mp3Url = URL.createObjectURL(newMp3File.files[0]);
+        const coverUrl = URL.createObjectURL(newCoverFile.files[0]);
+        
+        // Add new track to the array
+        const newTrack = {
+            trackName: trackName,
+            artistName: artistName,
+            mp3Src: mp3Url,
+            coverSrc: coverUrl
+        };
+        
+        tracks.push(newTrack);
+        
+        // Re-render track list
+        renderTrackList();
+        
+        // Close modal and reset form
+        addTrackModal.style.display = 'none';
+        document.body.style.overflow = '';
+        addTrackForm.reset();
+        
+        // Show success message
+        alert('Трек успешно добавлен!');
+    });
 
     // Track database
     const tracks = [
