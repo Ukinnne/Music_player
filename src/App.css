@@ -249,8 +249,8 @@ input[type="range"]::-moz-range-thumb {
 .track-list-container {
     width: 1450px;
     background-color: #141415;
-    margin: 40px auto;
-    padding: 30px;
+    margin: 10px auto;
+    padding: 20px;
     border-radius: 30px;
     box-sizing: border-box;
 }
@@ -335,7 +335,6 @@ input[type="range"]::-moz-range-thumb {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     z-index: 99;
     transition: transform 0.2s, background-color 0.2s;
 }
@@ -392,17 +391,17 @@ input[type="range"]::-moz-range-thumb {
 
 .submit-button {
     padding: 10px 20px;
-    background-color: #141415;
+    background-color: transparent;
     color: white;
-    border: none;
+    border: 1px solid #535353;
     border-radius: 20px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 24px;
     transition: background-color 0.2s;
 }
 
 .submit-button:hover {
-    background-color: #141415;
+    background-color: #252525;
 }
 
 .cancel-button {
@@ -412,10 +411,141 @@ input[type="range"]::-moz-range-thumb {
     border: 1px solid #535353;
     border-radius: 20px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 24px;
     transition: background-color 0.2s;
 }
 
 .cancel-button:hover {
     background-color: #252525;
+}
+
+/* Добавим эти стили в конец файла App.css */
+/* Обновленные стили для формы добавления трека */
+#add-track-modal .rectangle {
+    width: 415px;
+    height: auto;
+    min-height: 500px;
+    background-color: #141415;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    padding: 30px;
+    box-sizing: border-box;
+    border-radius: 30px;
+    animation: fadeIn 0.3s ease-out;
+}
+
+#add-track-modal h2 {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+    width: 100%;
+}
+
+#add-track-modal .track-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+#add-track-modal .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Увеличиваем отступ между label и input */
+    width: 100%;
+}
+
+#add-track-modal .form-group label {
+    font-size: 18px; /* Такой же размер, как у названия трека в плеере */
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: bold; /* Добавляем жирность как в плеере */
+}
+
+/* Стили для текстовых полей */
+#add-track-modal .form-group input[type="text"] {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #535353;
+    background-color: #252525;
+    color: white;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Calibri', sans-serif;
+}
+
+/* Кастомные стили для input type="file" */
+#add-track-modal .form-group .file-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+#add-track-modal .form-group .file-input-label {
+    display: block;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #535353;
+    background-color: #252525;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s;
+    font-family: 'Calibri', sans-serif;
+}
+
+#add-track-modal .form-group .file-input-label:hover {
+    background-color: #353535;
+}
+
+#add-track-modal .form-group input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+#add-track-modal .form-group .file-name {
+    margin-top: 8px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+}
+
+/* Стили для кнопок формы - теперь по центру */
+#add-track-modal .form-buttons {
+    display: flex;
+    justify-content: center; /* Выравниваем по центру */
+    gap: 25px; /* Увеличиваем расстояние между кнопками */
+    margin-top: 30px;
+}
+
+#add-track-modal .submit-button,
+#add-track-modal .cancel-button {
+    padding: 12px 30px;
+    background-color: transparent;
+    color: white;
+    border: 1px solid #535353;
+    border-radius: 25px; /* Более скругленные углы */
+    cursor: pointer;
+    font-size: 18px; /* Такой же размер, как у кнопок в плеере */
+    transition: all 0.2s;
+    font-weight: bold; /* Жирный текст как в плеере */
+    min-width: 120px; /* Минимальная ширина */
+    text-align: center;
+}
+
+#add-track-modal .submit-button:hover,
+#add-track-modal .cancel-button:hover {
+    background-color: #353535;
+    border-color: #646464;
 }

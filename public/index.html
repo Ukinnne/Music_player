@@ -100,11 +100,19 @@
                         </div>
                         <div class="form-group">
                             <label for="new-mp3-file">MP3 файл</label>
-                            <input type="file" id="new-mp3-file" accept=".mp3" required>
+                            <div class="file-input-wrapper">
+                                <label for="new-mp3-file" class="file-input-label">Выберите файл</label>
+                                <input type="file" id="new-mp3-file" accept=".mp3" required>
+                                <div class="file-name" id="mp3-file-name"></div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="new-cover-file">Обложка</label>
-                            <input type="file" id="new-cover-file" accept="image/*" required>
+                            <div class="file-input-wrapper">
+                                <label for="new-cover-file" class="file-input-label">Выберите файл</label>
+                                <input type="file" id="new-cover-file" accept="image/*" required>
+                                <div class="file-name" id="cover-file-name"></div>
+                            </div>
                         </div>
                         <div class="form-buttons">
                             <button type="button" id="cancel-add-track" class="cancel-button">Отмена</button>

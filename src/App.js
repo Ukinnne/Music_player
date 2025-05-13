@@ -27,6 +27,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const newArtistName = document.getElementById('new-artist-name');
     const newMp3File = document.getElementById('new-mp3-file');
     const newCoverFile = document.getElementById('new-cover-file');
+    // Добавьте этот код в App.js
+    document.getElementById('new-mp3-file').addEventListener('change', function(e) {
+        const fileName = e.target.files[0] ? e.target.files[0].name : 'Файл не выбран';
+        document.getElementById('mp3-file-name').textContent = fileName;
+    });
+
+    document.getElementById('new-cover-file').addEventListener('change', function(e) {
+        const fileName = e.target.files[0] ? e.target.files[0].name : 'Файл не выбран';
+        document.getElementById('cover-file-name').textContent = fileName;
+    });
 
     // Track database
     const tracks = [
