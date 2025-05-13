@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const artistNameElement = document.getElementById('Artist_Name');
     const albumCoverElement = document.getElementById('album-cover');
     const trackListContainer = document.getElementById('track-list');
-        // Add track elements
     const addTrackButton = document.getElementById('add-track-button');
     const addTrackModal = document.getElementById('add-track-modal');
     const addTrackForm = document.getElementById('add-track-form');
@@ -28,6 +27,34 @@ document.addEventListener('DOMContentLoaded', function() {
     const newArtistName = document.getElementById('new-artist-name');
     const newMp3File = document.getElementById('new-mp3-file');
     const newCoverFile = document.getElementById('new-cover-file');
+
+    // Track database
+    const tracks = [
+        {
+            trackName: "Пощады",
+            artistName: "DK",
+            mp3Src: "./music/poschady.mp3",
+            coverSrc: "./images/SYNONIM.png"
+        },
+        {
+            trackName: "KILL ME MAYBE",
+            artistName: "CMH",
+            mp3Src: "./music/KILL_ME_MAYBE.mp3",
+            coverSrc: "./images/KILL_THIS_ALBUM.jpg"
+        },
+        {
+            trackName: "Лох",
+            artistName: "LIDA",
+            mp3Src: "./music/loh.mp3",
+            coverSrc: "./images/NEW_ROCK_STAR.jpg"
+        }
+    ];
+
+    let currentTrackIndex = 0;
+    let wasPlaying = false;
+    let isFirstTrackPlayed = true;
+    let initialTrackIndex = null; // Запоминаем самый первый выбранный трек
+    let playlistEnded = false; // Флаг окончания плейлиста
 
     // Open add track modal
     addTrackButton.addEventListener('click', function() {
@@ -88,34 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Show success message
         alert('Трек успешно добавлен!');
     });
-
-    // Track database
-    const tracks = [
-        {
-            trackName: "Пощады",
-            artistName: "DK",
-            mp3Src: "./music/poschady.mp3",
-            coverSrc: "./images/SYNONIM.png"
-        },
-        {
-            trackName: "KILL ME MAYBE",
-            artistName: "CMH",
-            mp3Src: "./music/KILL_ME_MAYBE.mp3",
-            coverSrc: "./images/KILL_THIS_ALBUM.jpg"
-        },
-        {
-            trackName: "Лох",
-            artistName: "LIDA",
-            mp3Src: "./music/loh.mp3",
-            coverSrc: "./images/NEW_ROCK_STAR.jpg"
-        }
-    ];
-
-    let currentTrackIndex = 0;
-    let wasPlaying = false;
-    let isFirstTrackPlayed = true;
-    let initialTrackIndex = null; // Запоминаем самый первый выбранный трек
-    let playlistEnded = false; // Флаг окончания плейлиста
 
     // Function to load a track
     function loadTrack(index) {
